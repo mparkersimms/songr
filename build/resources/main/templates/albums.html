@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <ul th:each="albumInfo : ${albums}">
+        <li th:text="${albumInfo.title}"> Title</li>
+        <li th:text="${albumInfo.artist}"> Title</li>
+        <li th:text="${albumInfo.songCount}"> Title</li>
+        <li th:text="${albumInfo.albumLength}"> Title</li>
+        <li><img th:src="@{${albumInfo.imageUrl}}"></li>
+    </ul>
+
+
+</ul>
+
+</body>
+</html>
