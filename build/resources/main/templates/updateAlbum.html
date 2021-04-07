@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+    <nav>
+        <a href="/"><span>Home Page</span></a>
+        <a href="/albums"><span>Albums</span></a>
+        <a href="/capitalize/hello"><span>Capitalize</span></a>
+    </nav>
+</header>
+<h1>
+    Songr App
+</h1>
+<p>Update Page</p>
+
+<h1>ALBUMS</h1>
+<section>
+    <h2 th:text="${album.title}"> Title</h2>
+    <p th:text="'by: ' + ${album.artist}"> Title</p>
+    <div><img th:src="@{${album.imageUrl}}"></div>
+    <p th:text="'Song count: ' + ${album.songCount}"> Title</p>
+    <p th:text="' Album length: ' + ${album.albumLength}"> Title</p>
+    <form th:action="'/albums' + ${albumInfo.id} + '?_method=put'" method="POST">
+        <input type="submit" value="Update Album Info">
+    </form>
+</section>
+
+</body>
+</html>

@@ -6,17 +6,29 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<header>
+    <nav>
+        <a href="/"><span>Home Page</span></a>
+        <a href="/albums"><span>Albums</span></a>
+        <a href="/capitalize/hello"><span>Capitalize</span></a>
+    </nav>
+</header>
+<h1>ALBUMS</h1>
+    <section th:each="albumInfo : ${albums}">
+        <h2 th:text="${albumInfo.title}"> Title</h2>
+        <p th:text="'by: ' + ${albumInfo.artist}"> Title</p>
+        <div><img th:src="@{${albumInfo.imageUrl}}"></div>
+        <p th:text="'Song count: ' + ${albumInfo.songCount}"> Title</p>
+        <p th:text="' Album length: ' + ${albumInfo.albumLength}"> Title</p>
+        <form th:action="'/albums' + ${albumInfo.id} + '?_method=delete'" method="POST">
+            <input type="submit" value="X">
+        </form>
+        <form th:action="'/albums' + ${albumInfo.id} + '?_method=put'" method="POST">
+            <input type="submit" value="Update Album Info">
+        </form>
+    </section>
 
-    <ul th:each="albumInfo : ${albums}">
-        <li th:text="${albumInfo.title}"> Title</li>
-        <li th:text="${albumInfo.artist}"> Title</li>
-        <li th:text="${albumInfo.songCount}"> Title</li>
-        <li th:text="${albumInfo.albumLength}"> Title</li>
-        <li><img th:src="@{${albumInfo.imageUrl}}"></li>
-    </ul>
 
-
-</ul>
 
 </body>
 </html>

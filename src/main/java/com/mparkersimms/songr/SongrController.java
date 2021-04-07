@@ -1,15 +1,22 @@
 package com.mparkersimms.songr;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Controller
 public class SongrController {
+
+    @Autowired
+    public AlbumRepository albumRepository;
 
     @GetMapping("/hello")
     public String showHellowWorldPage(){
@@ -33,17 +40,42 @@ public class SongrController {
     public String renderAlbumsPage(
             Model m
     ){
-        ArrayList<Album> albums = new ArrayList<>();
-        Album album1 = new Album("Busyhead", "Noah Kahan", 10, "35 min 28 sec", "https://atwoodmagazine.com/wp-content/uploads/2019/06/Busyhead-Noah-Kahan-1-1050x700.jpg" );
-        albums.add(album1);
-        Album album2 = new Album("Come Tomorrow", "Dave Matthews Band", 14, "54 min 33 sec", "https://upload.wikimedia.org/wikipedia/en/0/0a/Come-tomorrow-cover-art.jpg" );
-        albums.add(album2);
-        Album album3 = new Album("Awake", "Tycho", 8, "36 min 47 sec", "http://blog.iso50.com/wp-content/uploads/2013/12/Awake-450.jpg" );
-        albums.add(album3);
-        String test = "Test";
+        List<Album> albums = albumRepository.findAll();
         m.addAttribute("albums", albums);
         return "albums.html";
     }
+
+    @PostMapping("/albums")
+    public RedirectView addAlbumData(
+            String title,
+            String artist,
+            int songCount,
+            String albumLength,
+            String imageUrl
+    ){
+        Album newAlbum = new Album(title, artist, songCount, albumLength, imageUrl);
+        albumRepository.save(newAlbum);
+        return new RedirectView("/albums");
+    }
+    @DeleteMapping("/albums{id}")
+    public RedirectView deleteAlbumData(@PathVariable long id){
+        albumRepository.deleteById(id);
+        return new RedirectView("/albums");
+    }
+
+//    @PutMapping("/albums{id}")
+//    public  RedirectView updateAlbumData(@PathVariable long id) {
+//        return new RedirectView("updateAlbum{tempId}");
+//    }
+
+//    @GetMapping("updateAlbum")
+//    public String renderUpdateAlbumPage(
+//            Model m
+//    ){
+//        Optional<Album> albumToBeUpdated = albumRepository.findById(tempAlbumId);
+//        m.addAttribute("album",albumToBeUpdated);
+//        return "updateAlbum.html";
+//    }
 
 
 

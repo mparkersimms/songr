@@ -1,6 +1,9 @@
 # songr application
 
+
+
 ## How to run the app
+
 
 Clone the repo down to your own machine.
 
@@ -9,6 +12,8 @@ Open the app in IntelliJ.
 Run the SongrApplication.java main method
 
 Open up a new web browser to localhost:8080 
+
+*Or - run gradle bootrun from the Command line to run the application.*
 
 routes:
 "/" --> takes you to the splash page. 

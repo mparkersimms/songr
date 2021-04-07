@@ -6,10 +6,34 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<header>
+    <nav>
+        <a href="/"><span>Home Page</span></a>
+        <a href="/albums"><span>Albums</span></a>
+        <a href="/capitalize/hello"><span>Capitalize</span></a>
+    </nav>
+</header>
 <h1>
     Songr App
 </h1>
 <p>A place for music!</p>
+<form action="/albums" method="POST">
+    <fieldset>
+        <legend>Add an Album</legend>
+        <label for="title">Title</label>
+        <input type="text" name="title">
+        <label for="artist">Artist</label>
+        <input type="text" name="artist">
+        <label for="songCount">Song Count</label>
+        <input type="number" name="songCount">
+        <label for="albumLength">Album Length</label>
+        <input type="text" name="albumLength">
+        <label for="imageUrl">Image URL</label>
+        <input type="text" name="imageUrl">
+        <input type="submit" value="Add Your Album!">
+    </fieldset>
+</form>
+
 
 </body>
 </html>
