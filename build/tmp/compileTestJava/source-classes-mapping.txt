@@ -1,2 +1,4 @@
 com/mparkersimms/songr/SongrApplicationTests.java
  com.mparkersimms.songr.SongrApplicationTests
+com/mparkersimms/songr/HelloWorldTest.java
+ com.mparkersimms.songr.HelloWorldTest
