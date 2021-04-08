@@ -1,10 +1,8 @@
 package com.mparkersimms.songr;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Album {
@@ -12,6 +10,10 @@ public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+
+
+    @OneToMany(mappedBy = "albumItsOn",cascade = CascadeType.ALL)
+    List<Song> songs;
 
     String title;
     String artist;
@@ -27,7 +29,11 @@ public class Album {
         this.imageUrl = imageUrl;
     }
 
-    Album(){}
+    public Album(){}
+
+    public List<Song> getSongs() {
+        return songs;
+    }
 
     public String getTitle() {
         return title;

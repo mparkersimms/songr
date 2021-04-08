@@ -33,6 +33,24 @@
         <input type="submit" value="Add Your Album!">
     </fieldset>
 </form>
+<h1>ALBUMS</h1>
+<section th:each="albumInfo : ${albums}">
+    <div><img th:src="@{${albumInfo.imageUrl}}"></div>
+    <div>
+    <h2 th:text="${albumInfo.title}"> Title</h2>
+    <p th:text="'by: ' + ${albumInfo.artist}"> Title</p>
+    <p th:text="'Song count: ' + ${albumInfo.songCount}"> Title</p>
+    <p th:text="' Album length: ' + ${albumInfo.albumLength}"> Title</p>
+    </div>
+    <div>
+    <form th:action="'/albums' + ${albumInfo.id} + '?_method=delete'" method="POST">
+        <input type="submit" value="Delete Album">
+    </form>
+    <form th:action="'/albums' + ${albumInfo.id} + '?_method=put'" method="POST">
+        <input type="submit" value="Update Album">
+    </form>
+    </div>
+</section>
 
 
 </body>

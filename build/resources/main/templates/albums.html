@@ -13,19 +13,55 @@
         <a href="/capitalize/hello"><span>Capitalize</span></a>
     </nav>
 </header>
-<h1>ALBUMS</h1>
-    <section th:each="albumInfo : ${albums}">
-        <h2 th:text="${albumInfo.title}"> Title</h2>
-        <p th:text="'by: ' + ${albumInfo.artist}"> Title</p>
-        <div><img th:src="@{${albumInfo.imageUrl}}"></div>
-        <p th:text="'Song count: ' + ${albumInfo.songCount}"> Title</p>
-        <p th:text="' Album length: ' + ${albumInfo.albumLength}"> Title</p>
-        <form th:action="'/albums' + ${albumInfo.id} + '?_method=delete'" method="POST">
-            <input type="submit" value="X">
-        </form>
-        <form th:action="'/albums' + ${albumInfo.id} + '?_method=put'" method="POST">
+<form th:action="'/albums' + ${album.id} + '?_method=put'" method="POST">
+    <fieldset>
+        <legend>Update the Album</legend>
+        <label for="title">Title</label>
+        <input type="text" name="title">
+        <label for="artist">Artist</label>
+        <input type="text" name="artist">
+        <label for="songCount">Song Count</label>
+        <input type="number" name="songCount">
+        <label for="albumLength">Album Length</label>
+        <input type="text" name="albumLength">
+        <label for="imageUrl">Image URL</label>
+        <input type="text" name="imageUrl">
+        <input type="submit" value="Update ">
+    </fieldset>
+</form>
+<form th:action="'/song' + ${album.id}" method="POST">
+    <fieldset th:name="${album.id}" >
+        <legend>Add a Song</legend>
+        <label for="title">Title</label>
+        <input type="text" name="title">
+        <label for="length">Length</label>
+        <input type="text" name="length">
+        <label for="trackNumber">Track Number</label>
+        <input type="number" name="trackNumber">
+        <input type="submit" value="Add">
+    </fieldset>
+</form>
+
+
+<h1>ALBUM</h1>
+    <section>
+        <h2 th:text="${album.title}"> Title</h2>
+        <p th:text="'by: ' + ${album.artist}"> Title</p>
+        <div><img th:src="@{${album.imageUrl}}"></div>
+        <p th:text="'Song count: ' + ${album.songCount}"> Title</p>
+        <p th:text="' Album length: ' + ${album.albumLength}"> Title</p>
+        <form th:action="'/albums' + ${album.id} + '?_method=put'" method="POST">
             <input type="submit" value="Update Album Info">
         </form>
+    </section>
+    <section>
+        <div th:each="song:${album.songs}">
+            <p th:text="${song.title}">Title</p>
+            <p th:text="${song.length}">Length</p>
+            <p th:text="${song.trackNumber}">Track Number</p>
+        </div>
+
+
     </section>
 
 

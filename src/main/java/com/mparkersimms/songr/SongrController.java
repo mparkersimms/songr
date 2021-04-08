@@ -32,7 +32,11 @@ public class SongrController {
         return "capitalized.html";
     }
     @GetMapping("/")
-    public String renderHomePage(){
+    public String renderHomePage(
+            Model m
+    ){
+        List<Album> albums = albumRepository.findAll();
+        m.addAttribute("albums", albums);
         return "splash.html";
     }
 
@@ -55,7 +59,7 @@ public class SongrController {
     ){
         Album newAlbum = new Album(title, artist, songCount, albumLength, imageUrl);
         albumRepository.save(newAlbum);
-        return new RedirectView("/albums");
+        return new RedirectView("/");
     }
     @DeleteMapping("/albums{id}")
     public RedirectView deleteAlbumData(@PathVariable long id){
@@ -63,19 +67,20 @@ public class SongrController {
         return new RedirectView("/albums");
     }
 
-//    @PutMapping("/albums{id}")
-//    public  RedirectView updateAlbumData(@PathVariable long id) {
-//        return new RedirectView("updateAlbum{tempId}");
-//    }
+    @PutMapping("/albums{id}")
+    public  RedirectView updateAlbumData(@PathVariable long id) {
+        return new RedirectView("/album{id}");
+    }
 
-//    @GetMapping("updateAlbum")
-//    public String renderUpdateAlbumPage(
-//            Model m
-//    ){
-//        Optional<Album> albumToBeUpdated = albumRepository.findById(tempAlbumId);
-//        m.addAttribute("album",albumToBeUpdated);
-//        return "updateAlbum.html";
-//    }
+    @GetMapping("album{id}")
+    public String renderAlbumPage(
+            @PathVariable long id,
+            Model m
+    ){
+        Album singleAlbum = albumRepository.getOne(id);
+        m.addAttribute("album",singleAlbum);
+        return "albums.html";
+    }
 
 
 
